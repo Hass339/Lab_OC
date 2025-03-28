@@ -1,17 +1,17 @@
-%include "../LIB/pc_io.inc"   ; Incluir declaraciones de procedimiento externos
+%include "../LIB/pc_io.inc"   
 
 section .text
-    global _start       ; referencia para inicio de programa
+    global _start       
     
 _start:
-    lea esi, [msg]      ; Cargar la dirección de msg en esi
-    mov byte [esi+26], '@'  ; Reemplazar '0' por '@' (posición 26)
+    lea esi, [msg]      
+    mov byte [esi+26], '@'  
 
-    mov edx, msg        ; edx = dirección de la cadena msg
-    call puts           ; imprime cadena msg terminada en valor nulo (0)
+    mov edx, msg        
+    call puts           
 
-    mov eax, 1          ; seleccionar llamada al sistema para fin de programa
-    int 0x80            ; llamada al sistema - fin de programa
+    mov eax, 1          
+    int 0x80            
 
 section .data
 msg db  'abcdefghijklmnopqrstuvwxyz0123456789', 0xa, 0  ; Cadena original
