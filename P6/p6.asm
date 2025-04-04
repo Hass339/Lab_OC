@@ -15,7 +15,7 @@ _start:
 ;----------------INCISO B)--------------
     mov cx, 0x3F48
 
-    sal cx, 4
+    shl cx, 4
 
     movzx eax, cx
     call pHex_w
