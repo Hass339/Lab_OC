@@ -1,17 +1,27 @@
-%include "../LIB/pc_io.inc"  	; incluir declaraciones de procedimiento externos
-								; que se encuentran en la biblioteca libpc_io.a
+%include "../LIB/pc_iox.inc"
+extern pbin.o
 
-section	.text
-	global _start       ;referencia para inicio de programa
-	
-_start:                   
-	mov edx, msg		; edx = dirección de la cadena msg
-	call puts			; imprime cadena msg terminada en valor nulo (0)
+section .text
+    global _start
 
-	mov	eax, 1	    	; seleccionar llamada al sistema para fin de programa
-	int	0x80        	; llamada al sistema - fin de programa
+_start:
+;----------------INCISO A)--------------
+    mov eax, 0x22446688    
+    ror eax, 4            
 
-section	.data
-msg	db  'Zbcdefghijklmnopqrstuvwxyz0123456789',0xa,0 
+    call pHex_dw          
+    mov al, 0x0A         
+    call putchar
+;----------------INCISO B)--------------
+    mov cx, 0x3F48
 
+    sal cx, 4
 
+    movzx eax, cx
+    call pHex_w
+
+    mov al, 0x0A
+    call putchar
+;----------------FIN DEL PROGRAMA--------------
+    mov eax, 1            
+    int 0x80
